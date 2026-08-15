@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# NiceGUI 运行时缓存
+.nicegui/
+
+# 虚拟环境
+.venv/
+venv/
+
+# 测试与工具缓存
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+
+# 编辑器/系统
+.DS_Store
+.idea/
+.vscode/
