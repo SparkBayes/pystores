@@ -46,3 +46,16 @@ class TestNiceGUIStore:
         todo = await Todo.get_instance()
         assert await Todo.dispose_instance()
         assert await Todo.get_instance() is not todo
+
+    def test_bridge_methods_exist(self):
+        """NiceGUIStore 提供 PyWebView 桥接方法"""
+        assert hasattr(Todo, "execute_client_function")
+        assert hasattr(Todo, "check_ready")
+
+    async def test_bridge_not_client_mode(self):
+        """非客户端模式下执行客户端函数返回失败"""
+        nicegui_backend()
+        todo = await Todo.get_instance()
+        result = await todo.execute_client_function("sync_auth", {"token": "x"})
+        assert result.is_failure()
+        assert result.code == "NotClientMode"

@@ -4,11 +4,18 @@
 """
 
 from pystores.backends.nicegui.binding import NiceGUIStore
+from pystores.backends.nicegui.bridge import Bridge
 from pystores.backends.nicegui.context import NiceGUIContext
 from pystores.backends.nicegui.storage import NiceGUIStorage
 from pystores.core.base import BaseStore, ServiceExecutor
 
-__all__ = ["NiceGUIContext", "NiceGUIStorage", "NiceGUIStore", "configure"]
+__all__ = [
+    "Bridge",
+    "NiceGUIContext",
+    "NiceGUIStorage",
+    "NiceGUIStore",
+    "configure",
+]
 
 
 def configure(*, service: ServiceExecutor | None = None) -> None:
