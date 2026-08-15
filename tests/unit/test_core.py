@@ -58,6 +58,14 @@ class FakeContext:
     def get_instance_primary_context_id(self, instance: Any) -> str:
         return getattr(instance, "_context_id", "")
 
+    def get_instance_context_info(self, instance: Any) -> Dict[str, str]:
+        return {
+            "context_id": getattr(instance, "_context_id", ""),
+            "tab_id": getattr(instance, "_tab_id", ""),
+            "browser_id": getattr(instance, "_browser_id", ""),
+            "client_id": getattr(instance, "_client_id", ""),
+        }
+
 
 # 可复用的测试状态类
 class CounterStore(BaseStore):
@@ -92,6 +100,18 @@ class TestInstanceLifecycle:
         instance = await CounterStore.get_instance()
         assert await CounterStore.dispose_instance()
         assert await CounterStore.get_instance() is not instance
+
+    async def test_get_instance_context_info(self):
+        """get_instance_context_info 返回实例的完整上下文信息"""
+        BaseStore.configure(context=FakeContext("u1"))
+        instance = await CounterStore.get_instance()
+        info = BaseStore._context.get_instance_context_info(instance)
+        assert info == {
+            "context_id": "client_u1",
+            "tab_id": "tab_u1",
+            "browser_id": "browser_u1",
+            "client_id": "client_u1",
+        }
 
     async def test_dispose_all_instances(self):
         BaseStore.configure(context=FakeContext("u1"))

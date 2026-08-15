@@ -58,6 +58,13 @@ class ContextProvider(Protocol):
         """获取实例的主上下文 ID"""
         ...
 
+    def get_instance_context_info(self, instance: Any) -> Dict[str, str]:
+        """获取实例的完整上下文信息（context_id/tab_id/browser_id/client_id）
+
+        调试 / 工具场景使用，例如记录"哪个实例属于哪个会话"。
+        """
+        ...
+
 
 class MemoryContext:
     """内存上下文 - 无 UI 框架时的默认实现
@@ -92,3 +99,11 @@ class MemoryContext:
 
     def get_instance_primary_context_id(self, instance: Any) -> str:
         return ""
+
+    def get_instance_context_info(self, instance: Any) -> Dict[str, str]:
+        return {
+            "context_id": getattr(instance, "_context_id", ""),
+            "tab_id": getattr(instance, "_tab_id", ""),
+            "browser_id": getattr(instance, "_browser_id", ""),
+            "client_id": getattr(instance, "_client_id", ""),
+        }
