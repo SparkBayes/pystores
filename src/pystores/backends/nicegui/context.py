@@ -22,9 +22,13 @@ class NiceGUIContext:
 
     def get_tab_id(self) -> str:
         """生成标签页级 ID"""
-        if hasattr(ui, "context") and hasattr(ui.context, "client"):
-            tab_id = getattr(ui.context.client, "tab_id", None)
-            return f"tab_{tab_id}" if tab_id else ""
+        try:
+            if hasattr(ui, "context") and hasattr(ui.context, "client"):
+                tab_id = getattr(ui.context.client, "tab_id", None)
+                return f"tab_{tab_id}" if tab_id else ""
+        except RuntimeError:
+            # NiceGUI 2.x 在无 UI 上下文（测试/后台）时抛 RuntimeError
+            pass
         return ""
 
     def get_browser_id(self) -> str:
@@ -40,9 +44,13 @@ class NiceGUIContext:
 
     def get_client_id(self) -> str:
         """生成客户端级 ID"""
-        if hasattr(ui, "context") and hasattr(ui.context, "client"):
-            client_id = getattr(ui.context.client, "id", None)
-            return f"client_{client_id}" if client_id else ""
+        try:
+            if hasattr(ui, "context") and hasattr(ui.context, "client"):
+                client_id = getattr(ui.context.client, "id", None)
+                return f"client_{client_id}" if client_id else ""
+        except RuntimeError:
+            # NiceGUI 2.x 在无 UI 上下文（测试/后台）时抛 RuntimeError
+            pass
         return ""
 
     def get_context_id(self, isolation_level: str) -> str:

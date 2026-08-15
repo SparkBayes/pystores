@@ -6,14 +6,13 @@ on:
   pull_request:
 
 jobs:
-  # 完整测试：Python × NiceGUI 版本矩阵（验证后端兼容性）
+  # 完整测试：Python 版本矩阵（NiceGUI 3.x+，由 pyproject 声明 >=3.0）
   test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         python-version: ["3.10", "3.11", "3.12"]
-        nicegui-version: ["<3", ">=3"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -21,7 +20,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: 安装依赖
         run: |
-          pip install "nicegui${{ matrix.nicegui-version }}" pytest pytest-asyncio ruff
+          pip install "nicegui>=3" pytest pytest-asyncio ruff
           pip install -e .
       - name: ruff 检查
         run: ruff check src/ tests/ examples/ --select E,F
