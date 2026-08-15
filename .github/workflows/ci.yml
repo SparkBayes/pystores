@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  # 完整测试：Python × NiceGUI 版本矩阵（验证后端兼容性）
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+        nicegui-version: ["<3", ">=3"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: 安装依赖
+        run: |
+          pip install "nicegui${{ matrix.nicegui-version }}" pytest pytest-asyncio ruff
+          pip install -e .
+      - name: ruff 检查
+        run: ruff check src/ tests/ examples/ --select E,F
+      - name: 运行全量测试
+        run: pytest tests/ -v
+
+  # 核心零依赖验证：不安装 nicegui，确认核心可独立运行（未来脱钩保障）
+  core-framework-free:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: 安装核心（无 nicegui）
+        run: |
+          pip install pytest pytest-asyncio ruff
+          pip install -e . --no-deps
+      - name: 验证核心零依赖（NiceGUIStore 优雅降级为 None）
+        run: python -c "import pystores; assert pystores.NiceGUIStore is None; print('核心零依赖验证通过')"
+      - name: 运行核心单元测试
+        run: pytest tests/unit/ -v
