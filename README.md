@@ -123,6 +123,8 @@ The core speaks three small protocols. The NiceGUI backend implements them. **Po
 - Each example is a self-contained, runnable lesson (see [Examples](#examples)).
 - Working through `01 → 05` in order covers every core concept.
 
+> **Note**: The browser-extension bridge from the original production project uses an application-specific protocol and is intentionally **not** open-sourced. Only the PyWebView bridge (`Bridge`) ships as an optional plugin.
+
 ## License
 
 [MIT](LICENSE) © SparkBayes
