@@ -4,6 +4,8 @@
 
 Declarative, multi-user-isolated stores for NiceGUI and any other server-side UI framework.
 
+[![PyPI version](https://img.shields.io/pypi/v/pystores.svg)](https://pypi.org/project/pystores/)
+[![PyPI downloads](https://img.shields.io/pypi/dm/pystores.svg)](https://pypi.org/project/pystores/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](pyproject.toml)
 
