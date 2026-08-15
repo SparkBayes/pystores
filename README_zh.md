@@ -4,7 +4,7 @@
 
 为 NiceGUI 及其他服务端 UI 框架提供声明式、多用户隔离的状态管理。
 
-[English](README.md) | **简体中文**
+[English](https://github.com/SparkBayes/pystores/blob/main/README.md) | **简体中文**
 
 [![CI](https://img.shields.io/github/actions/workflow/status/SparkBayes/pystores/ci.yml)](https://github.com/SparkBayes/pystores/actions)
 [![PyPI version](https://img.shields.io/pypi/v/pystores.svg)](https://pypi.org/project/pystores/)
