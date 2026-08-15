@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "pystores"
 version = "0.1.0"
-description = "Framework-agnostic, server-side UI state management for Python (NiceGUI backend included)"
+description = "Declarative, multi-user-isolated state management for server-side Python UI. Framework-free core with a first-class NiceGUI backend."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
