@@ -4,6 +4,7 @@
 
 Declarative, multi-user-isolated stores for NiceGUI and any other server-side UI framework.
 
+[![CI](https://img.shields.io/github/actions/workflow/status/SparkBayes/pystores/ci.yml)](https://github.com/SparkBayes/pystores/actions)
 [![PyPI version](https://img.shields.io/pypi/v/pystores.svg)](https://pypi.org/project/pystores/)
 [![PyPI downloads](https://img.shields.io/pypi/dm/pystores.svg)](https://pypi.org/project/pystores/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
